@@ -1,23 +1,23 @@
 <?php
-if ( isset( $sabox_options['sab_colored'] ) ) {
+if (isset($sabox_options['sab_colored'])) {
 	$sabox_color = 'sabox-colored';
 } else {
 	$sabox_color = '';
 }
 
-if ( isset( $sabox_options['sab_web_position'] ) && '0' != $sabox_options['sab_web_position'] ) {
+if (isset($sabox_options['sab_web_position']) && '0' != $sabox_options['sab_web_position']) {
 	$sab_web_align = 'sab-web-position';
 } else {
 	$sab_web_align = '';
 }
 
-if ( isset( $sabox_options['sab_web_target'] ) ) {
+if (isset($sabox_options['sab_web_target'])) {
 	$sab_web_target = '_blank';
 } else {
 	$sab_web_target = '_self';
 }
 
-if ( isset( $sabox_options['sab_web_rel'] ) ) {
+if (isset($sabox_options['sab_web_rel'])) {
 	$sab_web_rel = 'rel="nofollow"';
 } else {
 	$sab_web_rel = '';

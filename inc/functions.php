@@ -1,16 +1,12 @@
 <?php
 
-// If this file is called directly, busted!
-if ( ! defined( 'ABSPATH' ) ) {
+// Exit if this file is called directly
+if ( !defined('ABSPATH') ) {
 	exit;
 }
 
-/*----------------------------------------------------------------------------------------------------------
-	Adding the author box to the end of your single post
------------------------------------------------------------------------------------------------------------*/
+// Adding the author box to the end of your single post
 if ( ! function_exists( 'wpsabox_author_box' ) ) {
-
-
 	function wpsabox_author_box( $saboxmeta = null ) {
 
 		$show = ( is_single() || is_author() || is_archive() );

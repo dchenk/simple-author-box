@@ -1,16 +1,10 @@
 <?php
 
-/*----------------------------------------------------------------------------------------------------------
-	Uninstall Simple Author Box plugin - deletes plugin data in database
------------------------------------------------------------------------------------------------------------*/
+// Uninstall Simple Author Box plugin -- Deletes plugin data in database.
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
+// Exit if accessed directly or not uninstalling.
+if (!defined('ABSPATH') || !defined('WP_UNINSTALL_PLUGIN')) {
 	exit;
-}
-
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit();
 }
 
 delete_option( 'saboxplugin_options' );
