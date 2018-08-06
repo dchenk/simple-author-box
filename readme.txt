@@ -3,7 +3,7 @@ Contributors: machothemes, silkalns
 Tags: author box, responsive author box, author profile fields, author social icons, profile fields, author bio, author description, author profile, user profile, post author, rtl author box, amp, accelerated mobile pages
 Requires at least: 4.6
 Tested up to: 4.9
-Stable tag: 2.0.9
+Stable tag: 2.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -74,13 +74,16 @@ Or you can give back by recommending this amazing plugin to your friends!
 
 == Changelog ==
 
+= 2.1.0 =
+* Various cleanups and removed unused features.
+
 = 2.0.9 =
 * AMP CSS fixes & validator
 
-= 2.0.8 = 
+= 2.0.8 =
 * Fixed a small bug re. custom AMP CSS (forgot to add 'px' units for author description paragraphs, browser was interpreting them as em)
 
-= 2.0.7 = 
+= 2.0.7 =
 * Added AMP compatibility
 * Fixed some CSS isues & cleaned up the code
 

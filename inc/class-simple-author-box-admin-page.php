@@ -435,25 +435,7 @@ class Simple_Author_Box_Admin_Page {
 
 		<div class="masthead">
 			<div class="wrap sabox-wrap">
-				<div class="sabox-masthead-left">
-					<h1 class="wp-heading-inline">
-						<?php
-						/* Translators: Welcome Screen Title. */
-						echo esc_html( apply_filters( 'sabox_show_pro_title', __( 'Simple Author Box', 'saboxplugin' ) ) );
-						?>
-						<a target="_blank" href="<?php echo get_edit_user_link(); ?>"
-						   class="page-title-action"><?php _e( 'Edit user profile', 'saboxplugin' ); ?></a>
-					</h1>
-
-				</div>
-
-				<div class="sabox-masthead-right">
-					<a target="_blank"
-					   href="https://www.machothemes.com/support/?utm_source=sab&utm_medium=about-page&utm_campaign=support-button"><?php _e( 'Support', 'saboxplugin' ); ?>
-						&nbsp; &nbsp;<i class="dashicons dashicons-sos"></i>
-					</a>
-				</div>
-				<div class="wp-clearfix"></div>
+                <h1 class="wp-heading-inline">Simple Author Box</h1>
 			</div>
 		</div>
 
