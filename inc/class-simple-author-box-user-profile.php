@@ -94,7 +94,6 @@ class Simple_Author_Box_User_Profile {
 		$image_url   = get_user_meta( $user->ID, 'sabox-profile-image', true );
 
 		?>
-
 		<div id="sabox-custom-profile-image">
 			<h3><?php _e( 'Custom User Profile Image (Simple Author Box)', 'saboxplugin' ); ?></h3>
 			<table class="form-table">
@@ -114,7 +113,6 @@ class Simple_Author_Box_User_Profile {
 				</tr>
 			</table>
 		</div>
-
 		<?php
 	}
 

@@ -25,12 +25,7 @@ class Simple_Author_Box_Admin_Page {
 			),
 			'miscellaneous-options' => array(
 				'label' => __( 'Misc', 'saboxplugin' ),
-			),
-			'upgrade-pro'           => array(
-				'label' => esc_html__( 'Upgrade', 'saboxplugin' ),
-				'link'  => admin_url( 'admin.php?page=sab-upgrade' ),
-				'class' => 'upgrade-pro',
-			),
+			)
 		);
 
 		$settings = array(
@@ -428,23 +423,11 @@ class Simple_Author_Box_Admin_Page {
 
 	public function menu_page() {
 		add_menu_page(
-			__( 'Simple Author Box', 'saboxplugin' ), __( 'Simple Author', 'saboxplugin' ), 'manage_options', 'simple-author-box-options', array(
+			__('Simple Author Box', 'saboxplugin'), __('Simple Author', 'saboxplugin'), 'manage_options', 'simple-author-box-options', array(
 				$this,
 				'setting_page',
 			), SIMPLE_AUTHOR_BOX_ASSETS . 'img/sab-icon.png'
 		);
-
-		$show_upsell = apply_filters( 'sabox_show_upsell', true );
-
-		if ( $show_upsell ) {
-			add_submenu_page(
-				'simple-author-box-options', __( 'Upgrade to PRO', 'saboxplugin' ), __( 'Upgrade', 'saboxplugin' ), 'manage_options', 'sab-upgrade', array(
-					$this,
-					'render_pro_page',
-				)
-			);
-		}
-
 	}
 
 	public function setting_page() {
@@ -472,7 +455,7 @@ class Simple_Author_Box_Admin_Page {
 				</div>
 				<div class="wp-clearfix"></div>
 			</div>
-		</div><!--/.masthead-->
+		</div>
 
 		<div class="sabox-wrap">
 
@@ -617,7 +600,6 @@ class Simple_Author_Box_Admin_Page {
 
 	private function generate_admin_url( $id ) {
 		$url = 'admin.php?page=simple-author-box-options&tab=%1$s';
-
 		return admin_url( sprintf( $url, $id ) );
 	}
 
