@@ -1,9 +1,9 @@
 === Simple Author Box ===
 Contributors: machothemes, silkalns
 Tags: author box, responsive author box, author profile fields, author social icons, profile fields, author bio, author description, author profile, user profile, post author, rtl author box, amp, accelerated mobile pages
-Requires at least: 4.6
-Tested up to: 4.9
-Stable tag: 2.1.0
+Requires at least: 4.9
+Tested up to: 4.9.8
+Stable tag: 10.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -73,6 +73,9 @@ Or you can give back by recommending this amazing plugin to your friends!
 14. Plugin options page, simple view (v1.2)
 
 == Changelog ==
+
+= 10.0.0 =
+* Improved code throughout and set high version to not conflict old plugin in the WP repository.
 
 = 2.1.0 =
 * Various cleanups and removed unused features.

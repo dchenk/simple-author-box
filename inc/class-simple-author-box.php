@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Our main plugin class
+ * The main plugin class
  */
 class Simple_Author_Box {
 
@@ -9,28 +9,22 @@ class Simple_Author_Box {
 	private $options;
 
 	/**
-	 * Function constructor
+	 * Constructor
 	 */
 	function __construct() {
-
-		$this->options = get_option( 'saboxplugin_options', array() );
-
+		$this->options = get_option( 'saboxplugin_options', [] );
 		$this->load_dependencies();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
 	 * Singleton pattern
-	 *
-	 * @return void
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
-
 		return self::$instance;
 	}
 
@@ -39,7 +33,7 @@ class Simple_Author_Box {
 		require_once SIMPLE_AUTHOR_BOX_PATH . 'inc/class-simple-author-box-helper.php';
 		require_once SIMPLE_AUTHOR_BOX_PATH . 'inc/functions.php';
 
-		// everything below this line gets loaded only in the admin back-end
+		// Everything below this line gets loaded only in the admin back-end.
 		if ( is_admin() ) {
 			require_once SIMPLE_AUTHOR_BOX_PATH . 'inc/class-simple-author-box-admin-page.php';
 			require_once SIMPLE_AUTHOR_BOX_PATH . 'inc/class-simple-author-box-user-profile.php';
@@ -69,11 +63,10 @@ class Simple_Author_Box {
 		}
 	}
 
-
 	/**
 	 * See this: https://codex.wordpress.org/Plugin_API/Filter_Reference/get_avatar
 	 *
-	 * Custom function to overwrite WordPress's get_avatar function
+	 * Override WordPress's get_avatar function.
 	 *
 	 * @param [type] $avatar
 	 * @param [type] $id_or_email
@@ -81,7 +74,7 @@ class Simple_Author_Box {
 	 * @param [type] $default
 	 * @param [type] $alt
 	 * @param [type] $args
-	 * @return void
+	 * @return string
 	 */
 	public function replace_gravatar_image( $avatar, $id_or_email, $size, $default, $alt, $args ) {
 
@@ -90,20 +83,15 @@ class Simple_Author_Box {
 		if ( is_numeric( $id_or_email ) ) {
 			$user = get_user_by( 'id', absint( $id_or_email ) );
 		} elseif ( is_string( $id_or_email ) ) {
-
 			$user = get_user_by( 'email', $id_or_email );
-
 		} elseif ( $id_or_email instanceof WP_User ) {
 			// User Object
 			$user = $id_or_email;
 		} elseif ( $id_or_email instanceof WP_Post ) {
 			// Post Object
 			$user = get_user_by( 'id', (int) $id_or_email->post_author );
-		} elseif ( $id_or_email instanceof WP_Comment ) {
-
-			if ( ! empty( $id_or_email->user_id ) ) {
-				$user = get_user_by( 'id', (int) $id_or_email->user_id );
-			}
+		} elseif ( $id_or_email instanceof WP_Comment && ! empty( $id_or_email->user_id)) {
+			$user = get_user_by( 'id', (int) $id_or_email->user_id );
 		}
 
 		if ( ! $user || is_wp_error( $user ) ) {
@@ -111,7 +99,7 @@ class Simple_Author_Box {
 		}
 
 		$custom_profile_image = get_user_meta( $user->ID, 'sabox-profile-image', true );
-		$class                = array( 'avatar', 'avatar-' . (int) $args['size'], 'photo' );
+		$class = array( 'avatar', 'avatar-' . (int) $args['size'], 'photo' );
 
 		if ( ! $args['found_avatar'] || $args['force_default'] ) {
 			$class[] = 'avatar-default';
@@ -126,9 +114,8 @@ class Simple_Author_Box {
 		}
 
 		if ( '' !== $custom_profile_image && true !== $args['force_default'] ) {
-
 			$avatar = sprintf(
-				"<img alt='%s' src='%s' srcset='%s' class='%s' height='%d' width='%d' %s/>",
+				"<img alt='%s' src='%s' srcset='%s' class='%s' height='%d' width='%d' %s>",
 				esc_attr( $args['alt'] ),
 				esc_url( $custom_profile_image ),
 				esc_url( $custom_profile_image ) . ' 2x',
@@ -167,7 +154,6 @@ class Simple_Author_Box {
 
 	public function settings_link( array $links ) {
 		$links['sab'] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=simple-author-box-options' ), __( 'Settings', 'saboxplugin' ) );
-
 		return $links;
 	}
 
@@ -223,18 +209,13 @@ class Simple_Author_Box {
 	}
 
 	public function add_extra_fields( $extra_fields ) {
-
 		unset( $extra_fields['aim'] );
 		unset( $extra_fields['jabber'] );
 		unset( $extra_fields['yim'] );
-
 		return $extra_fields;
-
 	}
 
-	/*----------------------------------------------------------------------------------------------------------
-		Adding the author box main CSS
-	-----------------------------------------------------------------------------------------------------------*/
+	// Add the author box main CSS.
 	public function saboxplugin_author_box_style() {
 
 		$suffix = '.min';
@@ -247,8 +228,6 @@ class Simple_Author_Box {
 
 		/**
 		 * Check for duplicate font families, remove duplicates & re-work the font enqueue procedure
-		 *
-		 * @since 2.0.4
 		 */
 		if ( 'none' != strtolower( $sab_box_subset ) ) {
 			$sab_subset = '&amp;subset=' . strtolower( $sab_box_subset );
@@ -288,9 +267,6 @@ class Simple_Author_Box {
 			wp_register_style( 'sab-font', $sab_protocol . '://fonts.googleapis.com/css?family=' . implode( '|', $final_google_fonts ) . $sab_subset, array(), null );
 
 		}
-		/**
-		 * end changes introduced in 2.0.4
-		 */
 
 		if ( ! isset( $this->options['sab_load_fa'] ) ) {
 			wp_register_style( 'font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
@@ -314,39 +290,26 @@ class Simple_Author_Box {
 
 	}
 
-
 	public function inline_style() {
-
-		if ( ! is_single() and ! is_page() and ! is_author() and ! is_archive() ) {
+		if (!is_single() && !is_page() && !is_author() && !is_archive()) {
 			return;
 		}
-
-		$style  = '<style type="text/css">';
-		$style .= Simple_Author_Box_Helper::generate_inline_css();
-		$style .= '</style>';
-
-		echo $style;
+		echo '<style>' . Simple_Author_Box_Helper::generate_inline_css() . '</style>';
 	}
 
 	public function shortcode( $atts ) {
-		$defaults = array(
-			'ids' => '',
-		);
-
-		$atts = wp_parse_args( $atts, $defaults );
+		$atts = wp_parse_args($atts, ['ids' => '']);
 
 		if ( '' != $atts['ids'] ) {
 			$ids = explode( ',', $atts['ids'] );
 			ob_start();
 			$sabox_options = get_option( 'saboxplugin_options' );
 			foreach ( $ids as $user_id ) {
-
 				$template        = Simple_Author_Box_Helper::get_template();
 				$sabox_author_id = $user_id;
 				echo '<div class="sabox-plus-item">';
 				include( $template );
 				echo '</div>';
-
 			}
 			$html = ob_get_clean();
 		} else {
@@ -356,24 +319,17 @@ class Simple_Author_Box {
 		return $html;
 	}
 
-
 	public function show_social_media_icons( $return, $user ) {
-		if ( in_array( 'sab-guest-author', (array) $user->roles ) ) {
-			return false;
-		}
-
-		return true;
+		return !in_array('sab-guest-author', (array) $user->roles);
 	}
 
 	/**
 	 * AMP compatibility
-	 * @since 2.0
 	 *
 	 * @param $data
 	 *
 	 * @return mixed
 	 */
-
 	function sab_amp_css( $data ) {
 
 		$data['post_amp_styles'] = array(
@@ -470,7 +426,7 @@ class Simple_Author_Box {
 			'.saboxplugin-socials .fa-addthis:before'     => array(
 				"content: '\\f0fe' ",
 			),
-			// custom paddings & margins
+			// custom padding & margins
 			'.saboxplugin-wrap'                           => array(
 				'margin-top: ' . absint( get_option( 'sab_box_margin_top', 0 ) ) . 'px',
 				'margin-bottom: ' . absint( get_option( 'sab_box_margin_bottom', 0 ) ) . 'px',
@@ -481,15 +437,16 @@ class Simple_Author_Box {
 				'clear: both',
 				'overflow : hidden',
 				'word-wrap: break-word',
-				'position: relative',
+				'position: relative'
 			),
 		);
 
-		$data['font_urls'] = array(
+		$data['font_urls'] = [
 			'Font Awesome' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2',
 			'Font Awesome' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-		);
+		];
 
 		return $data;
 	}
+
 }
