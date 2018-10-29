@@ -8,9 +8,6 @@ class Simple_Author_Box {
 	private static $instance = null;
 	private $options;
 
-	/**
-	 * Constructor
-	 */
 	function __construct() {
 		$this->options = get_option( 'saboxplugin_options', [] );
 		$this->load_dependencies();
@@ -29,11 +26,9 @@ class Simple_Author_Box {
 	}
 
 	private function load_dependencies() {
-
 		require_once SIMPLE_AUTHOR_BOX_PATH . 'inc/class-simple-author-box-helper.php';
 		require_once SIMPLE_AUTHOR_BOX_PATH . 'inc/functions.php';
 
-		// Everything below this line gets loaded only in the admin back-end.
 		if ( is_admin() ) {
 			require_once SIMPLE_AUTHOR_BOX_PATH . 'inc/class-simple-author-box-admin-page.php';
 			require_once SIMPLE_AUTHOR_BOX_PATH . 'inc/class-simple-author-box-user-profile.php';
@@ -46,9 +41,8 @@ class Simple_Author_Box {
 	 * @return void
 	 */
 	private function define_admin_hooks() {
-
 		/**
-		 * everything hooked here loads on both front-end & back-end
+		 * Everything hooked here loads on both front-end & back-end
 		 */
 		add_filter( 'get_avatar', array( $this, 'replace_gravatar_image' ), 10, 6 );
 		add_filter( 'amp_post_template_data', array( $this, 'sab_amp_css' ) ); // @since 2.0.7
@@ -64,16 +58,9 @@ class Simple_Author_Box {
 	}
 
 	/**
-	 * See this: https://codex.wordpress.org/Plugin_API/Filter_Reference/get_avatar
-	 *
 	 * Override WordPress's get_avatar function.
+	 * See: https://codex.wordpress.org/Plugin_API/Filter_Reference/get_avatar
 	 *
-	 * @param [type] $avatar
-	 * @param [type] $id_or_email
-	 * @param [type] $size
-	 * @param [type] $default
-	 * @param [type] $alt
-	 * @param [type] $args
 	 * @return string
 	 */
 	public function replace_gravatar_image( $avatar, $id_or_email, $size, $default, $alt, $args ) {
@@ -143,7 +130,7 @@ class Simple_Author_Box {
 			add_action(
 				'wp_footer', array(
 					$this,
-					'inline_style',
+					'inline_style'
 				), 13
 			);
 		} else {
@@ -332,50 +319,50 @@ class Simple_Author_Box {
 	 */
 	function sab_amp_css( $data ) {
 
-		$data['post_amp_styles'] = array(
-			'.saboxplugin-wrap .saboxplugin-gravatar'     => array(
+		$data['post_amp_styles'] = [
+			'.saboxplugin-wrap .saboxplugin-gravatar'     => [
 				'float: left',
-				'padding: 20px',
-			),
-			'.saboxplugin-wrap .saboxplugin-gravatar img' => array(
+				'padding: 20px'
+			],
+			'.saboxplugin-wrap .saboxplugin-gravatar img' => [
 				'max-width: 100px',
-				'height: auto',
-			),
-			'.saboxplugin-wrap .saboxplugin-authorname'   => array(
+				'height: auto'
+			],
+			'.saboxplugin-wrap .saboxplugin-authorname'   => [
 				'font-size: 18px',
 				'line-height: 1',
 				'margin: 20px 0 0 20px',
+				'display: block'
+			],
+			'.saboxplugin-wrap .saboxplugin-authorname a' => [
+				'text-decoration: none'
+			],
+			'.saboxplugin-wrap .saboxplugin-desc'         => [
 				'display: block',
-			),
-			'.saboxplugin-wrap .saboxplugin-authorname a' => array(
-				'text-decoration: none',
-			),
-			'.saboxplugin-wrap .saboxplugin-desc'         => array(
-				'display: block',
-				'margin: 5px 20px',
-			),
-			'.saboxplugin-wrap .saboxplugin-desc a'       => array(
-				'text-decoration: none',
-			),
-			'.saboxplugin-wrap .saboxplugin-desc p'       => array(
+				'margin: 5px 20px'
+			],
+			'.saboxplugin-wrap .saboxplugin-desc a'       => [
+				'text-decoration: none'
+			],
+			'.saboxplugin-wrap .saboxplugin-desc p'       => [
 				'margin: 5px 0 12px 0',
 				'font-size: ' . absint( get_option( 'sab_box_desc_size', 14 ) ) . 'px',
-				'line-height: ' . absint( get_option( 'sab_box_desc_size', 14 ) + 7 ) . 'px',
-			),
-			'.saboxplugin-wrap .saboxplugin-web'          => array(
+				'line-height: ' . absint( get_option( 'sab_box_desc_size', 14 ) + 7 ) . 'px'
+			],
+			'.saboxplugin-wrap .saboxplugin-web'          => [
 				'margin: 0 20px 15px',
-				'text-align: left',
-			),
-			'.saboxplugin-wrap .saboxplugin-socials'      => array(
+				'text-align: left'
+			],
+			'.saboxplugin-wrap .saboxplugin-socials'      => [
 				'position: relative',
 				'display: block',
 				'background: #fcfcfc',
 				'padding: 5px',
 				'box-shadow: 0 1px 0 0 #eee inset',
 				'-webkit-box-shadow: 0 1px 0 0 #eee inset',
-				'-moz-box-shadow: 0 1px 0 0 #eee inset',
-			),
-			'.saboxplugin-wrap .saboxplugin-socials a'    => array(
+				'-moz-box-shadow: 0 1px 0 0 #eee inset'
+			],
+			'.saboxplugin-wrap .saboxplugin-socials a'    => [
 				'text-decoration: none',
 				'box-shadow: none',
 				'padding: 0',
@@ -384,50 +371,50 @@ class Simple_Author_Box {
 				'transition: opacity 0.4s',
 				'-webkit-transition: opacity 0.4s',
 				'-moz-transition: opacity 0.4s',
-				'-o-transition: opacity 0.4s',
-			),
-			'.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-grey' => array(
+				'-o-transition: opacity 0.4s'
+			],
+			'.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-grey' => [
 				'display: inline-block',
 				'vertical-align: middle',
 				'margin: 10px 5px',
-				'color: #444',
-			),
-			'.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color.fa:before' => array(
-				'font-size: ' . get_option( 'sab_box_icon_size', 14 ) . 'px',
-			),
-			'.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color.fa' => array(
+				'color: #444'
+			],
+			'.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color.fa:before' => [
+				'font-size: ' . get_option( 'sab_box_icon_size', 14 ) . 'px'
+			],
+			'.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color.fa' => [
 				'width: ' . absint( get_option( 'sab_box_icon_size', 14 ) ) * 2 . 'px',
 				'height: ' . absint( get_option( 'sab_box_icon_size', 14 ) ) * 2 . 'px',
-				'line-height: ' . absint( get_option( 'sab_box_icon_size', 14 ) ) * 2 . 'px',
-			),
-			'.saboxplugin-wrap .saboxplugin-socials.sabox-colored .saboxplugin-icon-color' => array(
+				'line-height: ' . absint( get_option( 'sab_box_icon_size', 14 ) ) * 2 . 'px'
+			],
+			'.saboxplugin-wrap .saboxplugin-socials.sabox-colored .saboxplugin-icon-color' => [
 				'color: #FFF',
 				'background-color: grey',
 				'margin: 5px',
 				'text-align: center',
-				'vertical-align: middle',
-			),
+				'vertical-align: middle'
+			],
 			// hotfixes for some icons since we changed from sabox-icon to using fa-
-			'.saboxplugin-socials .fa-googleplus:before'  => array(
-				"content: '\\f0d5' ",
-			),
-			'.saboxplugin-socials .fa-sharethis:before'   => array(
-				"content: '\\f1e0' ",
-			),
-			'.saboxplugin-socials .fa-stackoverflow:before' => array(
-				"content: '\\f16c' ",
-			),
-			'.saboxplugin-socials .fa-stumbleUpon:before' => array(
-				"content: '\\f1a4' ",
-			),
-			'.saboxplugin-socials .fa-user_email:before'  => array(
-				"content: '\\f0e0' ",
-			),
-			'.saboxplugin-socials .fa-addthis:before'     => array(
-				"content: '\\f0fe' ",
-			),
+			'.saboxplugin-socials .fa-googleplus:before'    => [
+				"content: '\\f0d5' "
+			],
+			'.saboxplugin-socials .fa-sharethis:before'     => [
+				"content: '\\f1e0' "
+			],
+			'.saboxplugin-socials .fa-stackoverflow:before' => [
+				"content: '\\f16c' "
+			],
+			'.saboxplugin-socials .fa-stumbleUpon:before'   => [
+				"content: '\\f1a4' "
+			],
+			'.saboxplugin-socials .fa-user_email:before'    => [
+				"content: '\\f0e0' "
+			],
+			'.saboxplugin-socials .fa-addthis:before'       => [
+				"content: '\\f0fe' "
+			],
 			// custom padding & margins
-			'.saboxplugin-wrap'                           => array(
+			'.saboxplugin-wrap'                             => [
 				'margin-top: ' . absint( get_option( 'sab_box_margin_top', 0 ) ) . 'px',
 				'margin-bottom: ' . absint( get_option( 'sab_box_margin_bottom', 0 ) ) . 'px',
 				'padding: ' . absint( get_option( 'sab_box_padding_top_bottom', 0 ) ) . 'px ' . absint( get_option( 'sab_box_padding_left_right', 0 ) ) . 'px',
@@ -438,12 +425,12 @@ class Simple_Author_Box {
 				'overflow : hidden',
 				'word-wrap: break-word',
 				'position: relative'
-			),
-		);
+			]
+		];
 
 		$data['font_urls'] = [
 			'Font Awesome' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2',
-			'Font Awesome' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+			'Font Awesome' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
 		];
 
 		return $data;
