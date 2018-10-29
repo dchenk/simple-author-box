@@ -121,7 +121,7 @@ class Simple_Author_Box_User_Profile {
 		if ( isset( $_POST['sabox-social-icons'] ) && isset( $_POST['sabox-social-links'] ) ) {
 
 			$social_platforms = apply_filters( 'sabox_social_icons', Simple_Author_Box_Helper::$social_icons );
-			$social_links     = array();
+			$social_links = [];
 			foreach ( $_POST['sabox-social-links'] as $index => $social_link ) {
 				if ( $social_link ) {
 					$social_platform = isset( $_POST['sabox-social-icons'][ $index ] ) ? $_POST['sabox-social-icons'][ $index ] : false;

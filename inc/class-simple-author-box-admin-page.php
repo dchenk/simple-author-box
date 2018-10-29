@@ -486,20 +486,7 @@ class Simple_Author_Box_Admin_Page {
 
 		</div>
 
-		<span class="sabox-version">
-				<?php echo _e( 'Version: ', 'saboxplugin' ) . esc_html( apply_filters( 'sabox_show_pro_version', SIMPLE_AUTHOR_BOX_VERSION ) ); ?>
-
-				<?php
-
-				$show_changelog = apply_filters( 'sabox_show_changelog', true );
-
-				if ( $show_changelog ) {
-					echo '&nbsp; &middot; &nbsp;';
-					echo '<a target="_blank" href="https://github.com/MachoThemes/simple-author-box/blob/master/readme.txt">' . __( 'Changelog', 'saboxplugin' ) . '</a>';
-				}
-				?>
-			</span>
-
+		<span class="sabox-version">Version <?php echo SIMPLE_AUTHOR_BOX_VERSION; ?></span>
 		<?php
 	}
 
@@ -553,7 +540,7 @@ class Simple_Author_Box_Admin_Page {
 		$default_sanitizers = array(
 			'toggle' => 'absint',
 			'slider' => 'absint',
-			'color'  => 'sanitize_hex_color',
+			'color'  => 'sanitize_hex_color'
 		);
 
 		if ( isset( $setting['sanitize'] ) && function_exists( $setting['sanitize'] ) ) {
@@ -561,9 +548,7 @@ class Simple_Author_Box_Admin_Page {
 		} elseif ( isset( $default_sanitizers[ $setting['type'] ] ) && function_exists( $default_sanitizers[ $setting['type'] ] ) ) {
 			$value = call_user_func( $default_sanitizers[ $setting['type'] ], $value );
 		} elseif ( 'select' == $setting['type'] ) {
-			if ( isset( $setting['choices'][ $value ] ) ) {
-				$value = $value;
-			} else {
+			if (!isset($setting['choices'][ $value ])) {
 				$value = $setting['default'];
 			}
 		} elseif ( 'multiplecheckbox' == $setting['type'] ) {
@@ -578,15 +563,6 @@ class Simple_Author_Box_Admin_Page {
 
 		return $value;
 
-	}
-
-	private function generate_admin_url( $id ) {
-		$url = 'admin.php?page=simple-author-box-options&tab=%1$s';
-		return admin_url( sprintf( $url, $id ) );
-	}
-
-	private function generate_admin_path( $id ) {
-		return $this->views_path . $id . '.php';
 	}
 
 	private function generate_setting_field( $field_name, $field ) {

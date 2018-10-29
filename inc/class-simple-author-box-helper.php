@@ -1,8 +1,5 @@
 <?php
 
-/**
- *
- */
 class Simple_Author_Box_Helper {
 
 	public static $fonts = array();
@@ -790,12 +787,10 @@ class Simple_Author_Box_Helper {
 	}
 
 	public static function get_custom_post_type() {
-		$post_types = get_post_types(
-			array(
-				'publicly_queryable' => true,
-				'_builtin'           => false,
-			)
-		);
+		$post_types = get_post_types([
+			'publicly_queryable' => true,
+			'_builtin'           => false
+		]);
 
 		$post_types['post'] = __( 'Post', 'saboxplugin' );
 		$post_types['page'] = __( 'Page', 'saboxplugin' );

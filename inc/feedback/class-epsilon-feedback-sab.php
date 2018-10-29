@@ -12,10 +12,7 @@ class Epsilon_Feedback_SAB {
 
 		// Deactivation
 		add_filter(
-			'plugin_action_links_' . plugin_basename( $this->plugin_file ), array(
-				$this,
-				'filter_action_links',
-			)
+			'plugin_action_links_' . plugin_basename( $this->plugin_file ), [$this, 'filter_action_links']
 		);
 		add_action( 'admin_footer-plugins.php', array( $this, 'goodbye_ajax' ) );
 		add_action( 'wp_ajax_epsilon_deactivate_plugin', array( $this, 'epsilon_deactivate_plugin_callback' ) );
@@ -24,8 +21,6 @@ class Epsilon_Feedback_SAB {
 
 	/**
 	 * Filter the deactivation link to allow us to present a form when the user deactivates the plugin
-	 *
-	 * @since 1.0.0
 	 */
 	public function filter_action_links( $links ) {
 
@@ -42,8 +37,6 @@ class Epsilon_Feedback_SAB {
 	/**
 	 * Form text strings
 	 * These can be filtered
-	 *
-	 * @since 1.0.0
 	 */
 	public function goodbye_ajax() {
 		// Get our strings for the form
@@ -227,10 +220,9 @@ class Epsilon_Feedback_SAB {
 	<?php
 	}
 
-	/*
+	/**
 	 * Form text strings
 	 * These are non-filterable and used as fallback in case filtered strings aren't set correctly
-	 * @since 1.0.0
 	 */
 	public function get_form_info() {
 		$form            = array();
@@ -241,7 +233,7 @@ class Epsilon_Feedback_SAB {
 			'documentation'   => __( 'Lack of documentation', 'saboxplugin' ),
 			'features'        => __( 'Not the features I wanted', 'saboxplugin' ),
 			'better-plugin'   => __( 'Found a better plugin', 'saboxplugin' ),
-			'incompatibility' => __( 'Incompatible with theme or plugin', 'saboxplugin' ),
+			'incompatibility' => __( 'Incompatible with theme or plugin', 'saboxplugin' )
 		);
 		$form['details'] = __( 'How could we improve ?', 'saboxplugin' );
 
@@ -254,31 +246,19 @@ class Epsilon_Feedback_SAB {
 
 		if ( isset( $_POST['reason'] ) && isset( $_POST['details'] ) && isset( $_POST['tracking'] ) ) {
 			require_once 'class-epsilon-plugin-request-sab.php';
-			$args    = array(
+			$args = [
 				'reason'   => $_POST['reason'],
 				'details'  => $_POST['details'],
-				'tracking' => $_POST['tracking'],
-			);
+				'tracking' => $_POST['tracking']
+			];
 			$request = new Epsilon_Plugin_Request_SAB( $this->plugin_file, $args );
 			if ( $request->request_successful ) {
-				echo json_encode(
-					array(
-						'status' => 'ok',
-					)
-				);
+				echo json_encode(['status' => 'ok']);
 			} else {
-				echo json_encode(
-					array(
-						'status' => 'nok',
-					)
-				);
+				echo json_encode(['status' => 'nok']);
 			}
 		} else {
-			echo json_encode(
-				array(
-					'status' => 'ok',
-				)
-			);
+			echo json_encode(['status' => 'ok']);
 		}
 
 		die();
