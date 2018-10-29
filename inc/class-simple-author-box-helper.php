@@ -799,27 +799,18 @@ class Simple_Author_Box_Helper {
 	}
 
 	public static function get_template( $template_name = 'template-sab.php' ) {
+		$template = locate_template( array( 'sab/' . $template_name ) );
 
-		$template = '';
-
-		if ( ! $template ) {
-			$template = locate_template( array( 'sab/' . $template_name ) );
-		}
-
-		if ( ! $template && file_exists( SIMPLE_AUTHOR_BOX_PATH . 'template/' . $template_name ) ) {
+		if (!$template && file_exists( SIMPLE_AUTHOR_BOX_PATH . 'template/' . $template_name ) ) {
 			$template = SIMPLE_AUTHOR_BOX_PATH . 'template/' . $template_name;
 		}
 
-		if ( ! $template ) {
+		if (!$template) {
 			$template = SIMPLE_AUTHOR_BOX_PATH . 'template/template-sab.php';
 		}
 
 		// Allow 3rd party plugins to filter template file from their plugin.
-		$template = apply_filters( 'sabox_get_template_part', $template, $template_name );
-		if ( $template ) {
-			return $template;
-		}
-
+		return apply_filters( 'sabox_get_template_part', $template, $template_name );
 	}
 
 	public static function generate_inline_css() {

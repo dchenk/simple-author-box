@@ -23,16 +23,17 @@ if (isset($sabox_options['sab_web_rel'])) {
 	$sab_web_rel = '';
 }
 
-$authorDisplayName = esc_html(get_the_author_meta('display_name', $sabox_author_id));
-$authorPostsURL = esc_url(get_author_posts_url($sabox_author_id));
+if (get_the_author_meta('description') != '' || !isset($sabox_options['sab_no_description'])) {
+	if (!isset($sabox_author_id) || !$sabox_author_id) {
+		$sabox_author_id = get_the_author_meta('ID');
+	}
 
-$sab_author_link = sprintf('<a href="%s" class="vcard author"><span class="fn">About %s</span></a>', $authorPostsURL, $authorDisplayName);
+	$authorDisplayName = esc_html(get_the_author_meta('display_name', $sabox_author_id));
+	$authorPostsURL = esc_url(get_author_posts_url($sabox_author_id));
+	$sab_author_link = sprintf('<a href="%s" class="vcard author"><span class="fn">About %s</span></a>', $authorPostsURL, $authorDisplayName);
 
-if ( get_the_author_meta( 'description' ) != '' || ! isset( $sabox_options['sab_no_description'] ) ) { // hide the author box if no description is provided
+	echo '<div class="saboxplugin-wrap">';
 
-	echo '<div class="saboxplugin-wrap">'; // start saboxplugin-wrap div
-
-	// author box gravatar
 	echo '<div class="saboxplugin-gravatar">';
 	$custom_profile_image = get_the_author_meta( 'sabox-profile-image', $sabox_author_id );
 	if ( '' != $custom_profile_image ) {
@@ -42,7 +43,6 @@ if ( get_the_author_meta( 'description' ) != '' || ! isset( $sabox_options['sab_
 	}
 	echo '</div>';
 
-	// author box name
 	echo '<div class="saboxplugin-authorname">';
 	echo apply_filters('sabox_author_html', $sab_author_link, $sabox_options, $sabox_author_id);
 	echo '</div>';
@@ -55,19 +55,14 @@ if ( get_the_author_meta( 'description' ) != '' || ! isset( $sabox_options['sab_
 	echo wp_kses_post( $description );
 	echo '</div>';
 
-	if ( is_single() ) {
-		if ( get_the_author_meta( 'user_url' ) != '' and isset( $sabox_options['sab_web'] ) ) { // author website on single
-			echo '<div class="saboxplugin-web ' . esc_attr( $sab_web_align ) . '">';
-			echo '<a href="' . esc_url( get_the_author_meta( 'user_url', $sabox_author_id ) ) . '" target="' . esc_attr( $sab_web_target ) . '" ' . esc_attr( $sab_web_rel ) . '>' . esc_html( get_the_author_meta( 'user_url', $sabox_author_id ) ) . '</a>';
-			echo '</div>';
-		}
-	}
-
-	if (is_author() or is_archive()) {
-		if ( get_the_author_meta( 'user_url' ) != '' ) { // force show author website on author.php or archive.php
-			echo '<div class="saboxplugin-web ' . esc_attr( $sab_web_align ) . '">';
-			echo '<a href="' . esc_url( get_the_author_meta( 'user_url', $sabox_author_id ) ) . '" target="' . esc_attr( $sab_web_target ) . '" ' . esc_attr( $sab_web_rel ) . '>' . esc_html( get_the_author_meta( 'user_url', $sabox_author_id ) ) . '</a>';
-			echo '</div>';
+	if (is_single() || is_author() || is_archive()) {
+		// Show author's website on single if enabled, or if on author.php or archive.php.
+		$userURL = get_the_author_meta('user_url');
+		if ($userURL != '' && (is_single() && isset($sabox_options['sab_web']) || (is_author() || is_archive()))) {
+			echo '<div class="saboxplugin-web ' . esc_attr( $sab_web_align ) . '">' .
+				'<a href="' . esc_url($userURL) . '" target="' . esc_attr( $sab_web_target ) . '" ' . esc_attr( $sab_web_rel ) . '>' .
+				esc_html( get_the_author_meta( 'user_url', $sabox_author_id ) ) .
+				'</a></div>';
 		}
 	}
 
