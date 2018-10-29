@@ -3,7 +3,7 @@ Contributors: machothemes, silkalns
 Tags: author box, responsive author box, author profile fields, author social icons, profile fields, author bio, author description, author profile, user profile, post author, rtl author box, amp, accelerated mobile pages
 Requires at least: 4.9
 Tested up to: 4.9.8
-Stable tag: 10.0.0
+Stable tag: 10.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -44,16 +44,6 @@ The Simple Author Box plugin was designed to display the author information on p
 
 The second author box might be a theme feature and you will need to turn it off from your theme’s options, or hide it with custom CSS.
 
-= How can I get support? =
-
-You can get free support either here on the support forums: <a href="https://wordpress.org/support/plugin/simple-author-box">https://wordpress.org/support/plugin/simple-author-box</a>
-Or if you send us an email at <a href="mailto:support@machothemes.com">support@machothemes.com</a>
-
-= How can I say thanks? =
-
-You can say thank you by leaving us a review here: <a href="https://wordpress.org/support/plugin/simple-author-box/reviews/#new-post">https://wordpress.org/support/plugin/simple-author-box/reviews/#new-post</a>
-Or you can give back by recommending this amazing plugin to your friends!
-
 
 == Screenshots ==
 
@@ -73,6 +63,9 @@ Or you can give back by recommending this amazing plugin to your friends!
 14. Plugin options page, simple view (v1.2)
 
 == Changelog ==
+
+= 10.0.1 =
+* Fixed author link URL
 
 = 10.0.0 =
 * Improved code throughout and set high version to not conflict old plugin in the WP repository.
