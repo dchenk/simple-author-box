@@ -41,16 +41,12 @@ class Simple_Author_Box {
 	 * @return void
 	 */
 	private function define_admin_hooks() {
-		/**
-		 * Everything hooked here loads on both front-end & back-end
-		 */
+		// Everything hooked here loads on both front-end & back-end
 		add_filter( 'get_avatar', array( $this, 'replace_gravatar_image' ), 10, 6 );
 		add_filter( 'amp_post_template_data', array( $this, 'sab_amp_css' ) ); // @since 2.0.7
 
-		/**
-		 * Only load when we're in the admin panel
-		 */
-		if ( is_admin() ) {
+		// Only load when we're in the admin panel
+		if (is_admin()) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_style_and_scripts' ) );
 			add_filter( 'user_contactmethods', array( $this, 'add_extra_fields' ) );
 			add_filter( 'plugin_action_links_' . SIMPLE_AUTHOR_BOX_SLUG, array( $this, 'settings_link' ) );
@@ -127,12 +123,7 @@ class Simple_Author_Box {
 		}
 
 		if ( isset( $this->options['sab_footer_inline_style'] ) ) {
-			add_action(
-				'wp_footer', array(
-					$this,
-					'inline_style'
-				), 13
-			);
+			add_action('wp_footer', [$this, 'inline_style'], 13);
 		} else {
 			add_action( 'wp_head', array( $this, 'inline_style' ), 15 );
 		}

@@ -1,11 +1,10 @@
 <?php
 /**
  * Plugin Name: Simple Author Box
- * Plugin URI: http://wordpress.org/plugins/simple-author-box/
+ * Plugin URI: https://github.com/dchenk/simple-author-box
  * Description: Adds a responsive author box with social icons on your posts.
  * Version: 10.0.1
  * Author: Macho Themes & Wider Webs
- * Author URI: https://www.machothemes.com/
  * License: GPLv3
  */
 
@@ -27,16 +26,12 @@
 
 */
 
-define( 'SIMPLE_AUTHOR_BOX_PATH', plugin_dir_path( __FILE__ ) );
-define( 'SIMPLE_AUTHOR_BOX_ASSETS', plugins_url( '/assets/', __FILE__ ) );
-define( 'SIMPLE_AUTHOR_BOX_SLUG', plugin_basename( __FILE__ ) );
-define( 'SIMPLE_AUTHOR_BOX_VERSION', '10.0.1' );
-define( 'SIMPLE_AUTHOR_SCRIPT_DEBUG', false );
-
+define('SIMPLE_AUTHOR_BOX_PATH', plugin_dir_path( __FILE__ ));
+define('SIMPLE_AUTHOR_BOX_ASSETS', plugins_url( '/assets/', __FILE__ ));
+define('SIMPLE_AUTHOR_BOX_SLUG', plugin_basename( __FILE__ ));
+define('SIMPLE_AUTHOR_BOX_VERSION', '10.0.1');
+define('SIMPLE_AUTHOR_SCRIPT_DEBUG', false);
 
 require_once SIMPLE_AUTHOR_BOX_PATH . 'inc/class-simple-author-box.php';
 Simple_Author_Box::get_instance();
 
-// load the uninstall feedback class
-require_once 'inc/feedback/class-epsilon-feedback-sab.php';
-new Epsilon_Feedback_SAB( __FILE__ );
