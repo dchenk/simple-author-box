@@ -91,7 +91,7 @@ module.exports = function( grunt ) {
 		compress: {
 			build: {
 				options: {
-					pretty: true,                           // Pretty print file sizes when logging.
+					pretty: true, // Pretty print file sizes when logging.
 					archive: '<%= pkg.name %>.zip'
 				},
 				expand: true,
@@ -99,7 +99,7 @@ module.exports = function( grunt ) {
 				src: [ '**/*' ],
 				dest: '<%= pkg.name %>/'
 			}
-		},
+		}
 
 	} );
 
@@ -109,7 +109,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'textdomain', [
 		'checktextdomain'
 	] );
-	grunt.registerTask( 'mincss', [  // Minify CSS
+	grunt.registerTask( 'mincss', [ // Minify CSS
 		'clean:css',
 		'cssmin'
 	] );

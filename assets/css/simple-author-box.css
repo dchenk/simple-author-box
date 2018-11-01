@@ -1,10 +1,8 @@
 .saboxplugin-wrap {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
 	box-sizing: border-box;
-	border: 1px solid;
-	border-color: #eee;
+	border: 1px solid #eee;
 	width: 100%;
 	clear: both;
 	display: block;
@@ -22,7 +20,6 @@
 	max-width: 100px;
 	height: auto;
 }
-
 
 .saboxplugin-wrap .saboxplugin-authorname {
 	font-size: 18px;
@@ -178,8 +175,7 @@
 	content: '\f0e0' !important;
 }
 
-/*  COLORED BACKGROUND AND LONG SHADOW EFFECT FOR SOCIAL ICONS
--------------------------------------------------------------- */
+/*  COLORED BACKGROUND AND LONG SHADOW EFFECT FOR SOCIAL ICONS */
 .saboxplugin-socials.sabox-colored .saboxplugin-icon-color.fa-twitch {
 	background-color: #6441a5;
 }
@@ -1403,8 +1399,6 @@
 
 }
 
-/*  @Since 2.0.4
--------------------------------------------------------------- */
 body .saboxplugin-authorname a,
 body .saboxplugin-authorname a:hover {
 	box-shadow: none;
@@ -1416,12 +1410,12 @@ a.sab-profile-edit {
 	line-height: 1 !important;
 }
 
-	a.sab-profile-edit,
-	.sab-edit-settings a{
-		color: #0073aa !important; /* default WP link color */
-		box-shadow: none !important;
-		-webkit-box-shadow: none !important;
-	}
+a.sab-profile-edit,
+.sab-edit-settings a {
+	color: #0073aa !important;
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+}
 
 .sab-edit-settings {
 	margin-right: 15px;
@@ -1432,12 +1426,10 @@ a.sab-profile-edit {
 	line-height: 20px;
 }
 
-	.sab-edit-settings i {
-		margin-left: 5px;
-	}
+.sab-edit-settings i {
+	margin-left: 5px;
+}
 
-	.saboxplugin-socials {
-		line-height: 1 !important;
-	}
-
-
+.saboxplugin-socials {
+	line-height: 1 !important;
+}
