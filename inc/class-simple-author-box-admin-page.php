@@ -423,7 +423,7 @@ class Simple_Author_Box_Admin_Page {
 
 	public function menu_page() {
 		add_menu_page(
-			__('Simple Author Box', 'saboxplugin'), __('Simple Author', 'saboxplugin'), 'manage_options', 'simple-author-box-options', array(
+			__('Simple Author Box', 'saboxplugin'), __('Author Box', 'saboxplugin'), 'manage_options', 'simple-author-box-options', array(
 				$this,
 				'setting_page',
 			), SIMPLE_AUTHOR_BOX_ASSETS . 'img/sab-icon.png'
