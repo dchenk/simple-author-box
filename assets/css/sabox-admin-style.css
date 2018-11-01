@@ -482,14 +482,3 @@ body.toplevel_page_simple-author-box-options #wpcontent {
 .featured-section .ti-about-page-text-center {
 	text-align: center;
 }
-
-.free-pro-table .text-right {
-	text-align: right;
-}
-
-body .simple-author-box-wrap .wp-badge {
-	background: url('../img/sab-big-icon.png') center 35px no-repeat #27547D;
-	padding-top: 160px;
-	height: 0;
-	background-size: 80%;
-}

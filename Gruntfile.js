@@ -109,15 +109,17 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'textdomain', [
 		'checktextdomain'
 	] );
-	grunt.registerTask( 'mincss', [ // Minify CSS
+
+	grunt.registerTask( 'mincss', [
 		'clean:css',
 		'cssmin'
 	] );
-	// Build task
+
 	grunt.registerTask( 'build-archive', [
 		'clean:init',
 		'copy',
 		'compress:build',
 		'clean:init'
 	] );
+
 };
