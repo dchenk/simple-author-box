@@ -3,7 +3,7 @@ Contributors: machothemes, silkalns
 Tags: author box, responsive author box, author profile fields, author social icons, profile fields, author bio, author description, author profile, user profile, post author, rtl author box, amp, accelerated mobile pages
 Requires at least: 4.9
 Tested up to: 4.9.8
-Stable tag: 10.0.1
+Stable tag: 11.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,9 @@ The second author box might be a theme feature and you will need to turn it off 
 14. Plugin options page, simple view (v1.2)
 
 == Changelog ==
+
+= 11.0.0 =
+* Removed much unnecessary stuff, optimized code
 
 = 10.0.1 =
 * Fixed author link URL

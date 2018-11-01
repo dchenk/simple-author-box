@@ -142,24 +142,23 @@ class Simple_Author_Box {
 			$suffix = '';
 		}
 
-		// globally loaded
-		wp_enqueue_style( 'sabox-css', SIMPLE_AUTHOR_BOX_ASSETS . 'css/sabox.css' );
-		wp_enqueue_style( 'saboxplugin-admin-style', SIMPLE_AUTHOR_BOX_ASSETS . 'css/sabox-admin-style' . $suffix . '.css' );
+		// Globally loaded
+		wp_enqueue_style( 'sabox-css', SIMPLE_AUTHOR_BOX_ASSETS . 'css/sabox.css', [], SIMPLE_AUTHOR_BOX_VERSION );
+		wp_enqueue_style( 'saboxplugin-admin-style', SIMPLE_AUTHOR_BOX_ASSETS . 'css/sabox-admin-style' . $suffix . '.css', [], SIMPLE_AUTHOR_BOX_VERSION );
 
-		// loaded only on plugin page
+		// Loaded only on plugin page
 		if ( 'toplevel_page_simple-author-box-options' == $hook ) {
 
-			// Styles
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_style( 'jquery-ui', SIMPLE_AUTHOR_BOX_ASSETS . 'css/jquery-ui.min.css' );
 
-			// Scripts
 			wp_enqueue_script(
 				'sabox-admin-js', SIMPLE_AUTHOR_BOX_ASSETS . 'js/sabox-admin.js', array(
 					'jquery-ui-slider',
 					'wp-color-picker',
-				), false, true
+				), SIMPLE_AUTHOR_BOX_VERSION, true
 			);
+
 			wp_enqueue_script(
 				'sabox-plugin-install', SIMPLE_AUTHOR_BOX_ASSETS . 'js/plugin-install.js', array(
 					'jquery',

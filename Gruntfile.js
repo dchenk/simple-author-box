@@ -14,8 +14,7 @@ module.exports = function( grunt ) {
 		checktextdomain: {
 			standard: {
 				options: {
-					text_domain: [ 'saboxplugin' ], //Specify allowed domain(s)
-					create_report_file: 'true',
+					text_domain: [ 'saboxplugin' ], // Specify allowed domain(s)
 					keywords: [ //List keyword specifications
 						'__:1,2d',
 						'_e:1,2d',
